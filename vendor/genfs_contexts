@@ -1,1 +1,4 @@
 genfscon sysfs /devices/platform/10ca0000.hsi2c/i2c-10/10-0061/power_supply             u:object_r:sysfs_batteryinfo:s0
+
+# wake up nodes
+genfscon sysfs /devices/platform/google,ccd/power_supply/gccd/wakeup                    u:object_r:sysfs_wakeup:s0

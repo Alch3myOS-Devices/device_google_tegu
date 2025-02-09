@@ -44,6 +44,14 @@ $(call inherit-product-if-exists, vendor/google/camera/config.mk)
 # Face unlock
 $(call inherit-product-if-exists, vendor/google/faceunlock/config.mk)
 
+# Set support hide display cutout feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.support_hide_display_cutout=true
+
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay \
+    AvoidAppsInCutoutOverlay
+
 # Overlays
 PRODUCT_PACKAGES += \
     Alch3mySettingsTegu \

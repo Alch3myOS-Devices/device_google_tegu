@@ -8,12 +8,17 @@
 # Kernel
 TARGET_LINUX_KERNEL_VERSION := 6.1
 TARGET_KERNEL_DEVICE := tegu
-TARGET_KERNEL_DIR := device/google/$(TARGET_KERNEL_DEVICE)-kernels/$(TARGET_LINUX_KERNEL_VERSION)
-TARGET_KERNEL_PLATFORM_SOURCE := google/gs-$(TARGET_LINUX_KERNEL_VERSION)
+TARGET_KERNEL_PATH := device/google/tegu-kernels
+TARGET_KERNEL_DIR := $(TARGET_KERNEL_PATH)/6.1
+TARGET_BOARD_KERNEL_HEADERS := $(TARGET_KERNEL_DIR)/kernel-headers
+TARGET_PREBUILT_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
+LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 
 ifneq ($(TARGET_BOOTS_16K),true)
 PRODUCT_16K_DEVELOPER_OPTION := true
 endif
+
+PRODUCT_BUILD_IGNORE_APEX_CONTRIBUTION_CONTENTS := true
 
 # Shipping API level
 SHIPPING_API_LEVEL := 35
@@ -30,8 +35,18 @@ PRODUCT_PACKAGES += \
     android.hidl.allocator@1.0-service \
     hwservicemanager
 
+# Always use scudo for memory allocator
+PRODUCT_USE_SCUDO := true
+
+# Camera
+$(call inherit-product-if-exists, vendor/google/camera/config.mk)
+
+# Face unlock
+$(call inherit-product-if-exists, vendor/google/faceunlock/config.mk)
+
 # Overlays
 PRODUCT_PACKAGES += \
+    Alch3mySettingsTegu \
     DMServiceOverlayVendorTegu \
     FrameworkResOverlayProductTegu \
     FrameworkResOverlayVendorTegu \

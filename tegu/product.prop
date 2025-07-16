@@ -20,3 +20,7 @@ ro.quick_start.device_id=tegu
 
 # Telephony
 persist.vendor.ril.camp_on_earlier=1
+
+# Maintainer
+ro.alch3my.maintainer=Pyrtle93
+ro.alch3my.maintainer.url=https://t.me/PyrtlesPixels

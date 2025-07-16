@@ -15,6 +15,9 @@ VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 
 include device/google/zumapro/BoardConfig-common.mk
 
+BUILD_BROKEN_DUP_RULES := true
+DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
+
 # Kernel modules
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/recovery/modules.blocklist.vendor_kernel_boot
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat $(DEVICE_PATH)/recovery/modules.load.vendor_kernel_boot))
@@ -31,3 +34,6 @@ BOARD_VENDOR_SEPOLICY_DIRS += \
 include $(DEVICE_PATH)/wifi/BoardConfig-wifi.mk
 
 include $(VENDOR_PATH)/BoardConfigVendor.mk
+
+# Props
+TARGET_SYSTEM_PROP :=  device/google/tegu/tegu/system.prop
